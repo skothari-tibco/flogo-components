@@ -7,14 +7,18 @@
     "homepage": "https://github.com/prject-flogo/contrib/tree/master/activity/error",
     "input":[
       {
-        "name": "dockerId",
+        "name": "imagename",
         "type": "string"
       }
     ],
     "output": [
         {
-            "name":"output",
-            "type":"any"
+            "name":"logs",
+            "type":"string"
+        },
+        {
+            "name":"code",
+            "type":"int64"
         }
     ]
 }

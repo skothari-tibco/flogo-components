@@ -13,7 +13,7 @@ type Settings struct {
 }
 
 type Input struct {
-	Image string `md:"image"`
+	ImageName string `md:"imagename"`
 }
 
 type Output struct {
@@ -23,14 +23,14 @@ type Output struct {
 
 func (o *Input) ToMap() map[string]interface{} {
 	return map[string]interface{}{
-		"image": o.Image,
+		"imagename": o.ImageName,
 	}
 }
 
 func (o *Input) FromMap(values map[string]interface{}) error {
 
 	var err error
-	o.Image, err = coerce.ToString(values["image"])
+	o.ImageName, err = coerce.ToString(values["imagename"])
 	if err != nil {
 		return err
 	}

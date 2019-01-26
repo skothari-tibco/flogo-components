@@ -17,7 +17,7 @@
     ],
     "output": [
         {
-            "name":"imageid",
+            "name":"imagename",
             "type":"string"
         }
     ]
