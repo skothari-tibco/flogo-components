@@ -1,0 +1,39 @@
+{
+    "name": "flogo-github",
+    "type": "flogo:trigger",
+    "ref": "github.com/skothari-tibco/flogo-components/trigger/github_event",
+    "version": "0.0.1",
+    "title": "Receive Git Trigger",
+    "description": "Simple Github Trigger",
+    "homepage": "https://github.com/skothari-tibco/flogo-components/trigger/github_event/tree/master/trigger/rest",
+    "settings": [
+        {
+            "name": "port",
+            "type": "integer",
+            "required": true
+        },
+        {
+            "name":"url",
+            "type":"string",
+            "required":true
+        }
+    ],
+    "output": [
+        {
+            "name":"data",
+            "type":"any"
+        }
+        
+    ],
+    "handler":{
+        "settings":[
+            {
+                "name": "get_all",
+                "type": "boolean",
+                "required" : true
+            }
+         
+        ]
+    }
+
+}    

@@ -1,0 +1,33 @@
+{
+    "name":"twillio-activity",
+    "type":"flogo:activity",
+    "version": "0.0.2",
+    "title": "Twillio Activity",
+    "description": "Send a SMS using Twillio",
+    "homepage": "https://github.com/prject-flogo/contrib/tree/master/activity/rest",
+    "input":[
+        {
+            "name": "accountSID",
+            "type": "string"
+          },
+          {
+            "name": "authToken",
+            "type": "string"
+          },
+          {
+            "name": "from",
+            "type": "string"
+          },
+          {
+            "name": "to",
+            "type": "string"
+          },
+          {
+            "name": "message",
+            "type": "string"
+          }
+      
+    ],
+    "output":[]
+
+}

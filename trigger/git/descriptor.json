@@ -1,0 +1,64 @@
+{
+    "name": "flogo-git",
+    "type": "flogo:trigger",
+    "version": "0.0.2",
+    "title": "Receive Git Commit Notification",
+    "description": "Simple  Commit Notification Trigger",
+    "homepage": "",
+    "settings": [
+      {
+        "name": "port",
+        "type": "int",
+        "required": true
+      },
+      {
+        "name": "gitPath",
+        "type": "string",
+        "required": true
+      }
+    ],
+    "output": [
+      {
+        "name": "pathParams",
+        "type": "params"
+      },
+      {
+        "name": "queryParams",
+        "type": "params"
+      },
+      {
+        "name": "headers",
+        "type": "params"
+      },
+      {
+        "name": "content",
+        "type": "any"
+      }
+    ],
+    "reply": [
+      {
+        "name": "code",
+        "type": "int"
+      },
+      {
+        "name": "data",
+        "type": "any"
+      }
+    ],
+    "handler": {
+      "settings": [
+        {
+          "name": "method",
+          "type": "string",
+          "required" : true,
+          "allowed" : ["GET"]
+        },
+        {
+          "name": "path",
+          "type": "string",
+          "required" : true
+        }
+      ]
+    }
+  }
+  

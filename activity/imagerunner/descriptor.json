@@ -1,0 +1,20 @@
+{
+    "name": "image-runner",
+    "type": "flogo:activity",
+    "version": "0.0.1",
+    "title": "Image Runner",
+    "description": "Run the docker image",
+    "homepage": "https://github.com/prject-flogo/contrib/tree/master/activity/error",
+    "input":[
+      {
+        "name": "dockerId",
+        "type": "string"
+      }
+    ],
+    "output": [
+        {
+            "name":"output",
+            "type":"any"
+        }
+    ]
+}

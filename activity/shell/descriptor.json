@@ -1,0 +1,24 @@
+{
+    "name":"shell-activity",
+    "type":"flogo:activity",
+    "version": "0.0.2",
+    "title": "Shell Activity",
+    "description": "Invokes a Shell Command",
+    "homepage": "https://github.com/prject-flogo/contrib/tree/master/activity/rest",
+    "input":[
+        {
+            "name":"command",
+            "type":"string",
+            "value":""
+        }
+    ],
+    "output":[
+        {
+            "name":"result",
+            "type":"any",
+            "value":""
+        }
+
+    ]
+
+}

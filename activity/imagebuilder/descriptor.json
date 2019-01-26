@@ -1,0 +1,24 @@
+{
+    "name": "image-builder",
+    "type": "flogo:activity",
+    "version": "0.0.1",
+    "title": "Image Builder",
+    "description": "Build the docker image",
+    "homepage": "https://github.com/prject-flogo/contrib/tree/master/activity/error",
+    "input":[
+      {
+        "name": "dockerpath",
+        "type": "string"
+      },
+      {
+        "name": "imagename",
+        "type" : "string"
+      }
+    ],
+    "output": [
+        {
+            "name":"imageid",
+            "type":"string"
+        }
+    ]
+}
