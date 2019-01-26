@@ -16,10 +16,10 @@ import (
 	"text/template"
 
 	"github.com/julienschmidt/httprouter"
-	"github.com/project-flogo/contrib/trigger/git/cors"
 	"github.com/project-flogo/core/data/metadata"
 	"github.com/project-flogo/core/support/log"
 	"github.com/project-flogo/core/trigger"
+	"github.com/skothari-tibco/flogo-components/trigger/git/cors"
 )
 
 const (

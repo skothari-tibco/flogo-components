@@ -2,6 +2,7 @@ module github.com/skothari-tibco/flogo-components
 
 require (
 	github.com/Microsoft/go-winio v0.4.11 // indirect
+	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
 	github.com/docker/distribution v2.7.1+incompatible // indirect
 	github.com/docker/docker v1.13.1
@@ -13,6 +14,7 @@ require (
 	github.com/julienschmidt/httprouter v1.2.0
 	github.com/opencontainers/go-digest v1.0.0-rc1 // indirect
 	github.com/pkg/errors v0.8.1 // indirect
+	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/project-flogo/core v0.9.0-alpha.4
 	github.com/sfreiberg/gotwilio v0.0.0-20181223013140-ccf5c3cb3e06
 	github.com/stretchr/testify v1.2.2
