@@ -43,8 +43,8 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	output := &Output{}
 	ctx.GetInputObject(input)
 
-	if input.Image != "" {
-		a.settings.Config = &container.Config{Image: input.Image}
+	if input.ImageName != "" {
+		a.settings.Config = &container.Config{Image: input.ImageName}
 	}
 
 	bctx := context.Background()
