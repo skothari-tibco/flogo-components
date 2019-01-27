@@ -18,7 +18,7 @@ type Input struct {
 
 type Output struct {
 	Logs string `md:"logs"`
-	Code int64  `md:"code"`
+	Code int    `md:"code"`
 }
 
 func (o *Input) ToMap() map[string]interface{} {
@@ -52,7 +52,7 @@ func (o *Output) FromMap(values map[string]interface{}) error {
 	if err != nil {
 		return err
 	}
-	o.Code, err = coerce.ToInt64(values["code"])
+	o.Code, err = coerce.ToInt(values["code"])
 	if err != nil {
 		return err
 	}

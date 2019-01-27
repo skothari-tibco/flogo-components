@@ -25,10 +25,10 @@ func TestSettings(t *testing.T) {
 	assert.Nil(t, err)
 
 	tc := test.NewActivityContext(act.Metadata())
-	tc.SetInput("image", "temp")
+	tc.SetInput("imagename", "my-app:latest")
 	//eval
 	_, err = act.Eval(tc)
 	fmt.Println(tc.GetOutput("code"))
 	//val := tc.GetOutput("result")
-	assert.Nil(t, err)
+	assert.Equal(t, 0, tc.GetOutput("code"))
 }

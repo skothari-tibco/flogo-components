@@ -88,7 +88,7 @@ func main(){
 			fmt.Println(err)
 		}
 	}()
-	time.Sleep(1 * time.Second)
+	time.Sleep(2 * time.Second)
 	fmt.Println("Successfully Committed")
 }
 `
@@ -108,7 +108,7 @@ func main(){
 
 	err = exec.Command("mv", "post-commit", filepath.Join(gitpath, ".git", "hooks")).Run()
 
-	err = exec.Command("rm", "post-commit.go").Run()
+	//err = exec.Command("rm", "post-commit.go").Run()
 
 	if err != nil {
 		return err
@@ -203,6 +203,7 @@ func newActionHandler(rt *Trigger, handler trigger.Handler) httprouter.Handle {
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
+		rt.logger.Info("Request receieved....")
 		rt.logger.Debugf("Received request for id '%s'", rt.id)
 
 		c := cors.New(CorsPrefix, rt.logger)

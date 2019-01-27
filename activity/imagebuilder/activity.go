@@ -10,6 +10,7 @@ import (
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/client"
+	"github.com/docker/docker/pkg/archive"
 	"github.com/project-flogo/core/activity"
 )
 
@@ -36,22 +37,27 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	input := &Input{}
 	ctx.GetInputObject(input)
 
-	dockerFileTarReader, err := getDockerTar(input.DockerPath)
+	//dockerFileTarReader, err := getDockerTar(input.DockerPath)
+
+	ctx.Logger().Info(" Starting to build the image")
+
+	reader, err := archive.TarWithOptions(input.DockerPath, &archive.TarOptions{})
 
 	cli, _ := client.NewEnvClient()
 
 	if input.ImageName == "" {
+		ctx.Logger().Info("Image name not specified", input)
 		return true, errors.New("Image name not specified")
 	}
 
 	buildOptions := types.ImageBuildOptions{
 		Dockerfile: "Dockerfile",
-		Context:    dockerFileTarReader,
-		Remove:     true,
-		Tags:       []string{input.ImageName},
+		//Context:    dockerFileTarReader,
+		Remove: true,
+		Tags:   []string{input.ImageName},
 	}
 
-	buildResp, err := cli.ImageBuild(context.Background(), dockerFileTarReader, buildOptions)
+	buildResp, err := cli.ImageBuild(context.Background(), reader, buildOptions)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -72,13 +78,13 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 
 		ctx.Logger().Info("Image id is ", imageID)
 
-		ctx.SetOutput("image", input.ImageName)
+		ctx.SetOutput("imagename", input.ImageName)
 		return true, nil
 	}
 
 	ctx.Logger().Info("Error in building image")
 
-	return true, err
+	return true, errors.New("Error in building image refer logs")
 
 	/*
 		_, err = io.Copy(os.Stdout, buildResp.Body)

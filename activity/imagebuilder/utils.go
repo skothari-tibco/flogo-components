@@ -39,6 +39,7 @@ func getDockerTar(path string) (*bytes.Reader, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	return bytes.NewReader(buf.Bytes()), nil
 }
 

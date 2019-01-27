@@ -2,11 +2,13 @@ package imagerunner
 
 import (
 	"bytes"
+	"fmt"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
 	"github.com/project-flogo/core/activity"
+	"github.com/project-flogo/core/data/coerce"
 	"github.com/project-flogo/core/data/metadata"
 	"golang.org/x/net/context"
 )
@@ -23,7 +25,7 @@ func (a *Activity) Metadata() *activity.Metadata {
 	return activityMd
 }
 
-var activityMd = activity.ToMetadata(&Settings{})
+var activityMd = activity.ToMetadata(&Settings{}, &Input{}, &Output{})
 
 func New(ctx activity.InitContext) (activity.Activity, error) {
 	s := &Settings{}
@@ -33,7 +35,7 @@ func New(ctx activity.InitContext) (activity.Activity, error) {
 	}
 
 	act := &Activity{settings: s}
-
+	fmt.Println("Registering Settings")
 	return act, nil
 }
 
@@ -43,6 +45,7 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	output := &Output{}
 	ctx.GetInputObject(input)
 
+	ctx.Logger().Info("Creating the container for image ", input.ImageName)
 	if input.ImageName != "" {
 		a.settings.Config = &container.Config{Image: input.ImageName}
 	}
@@ -58,6 +61,7 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	if err != nil {
 		return true, err
 	}
+	ctx.Logger().Info("Executing the container...")
 	if err := cli.ContainerStart(bctx, resp.ID, types.ContainerStartOptions{}); err != nil {
 		return true, err
 	}
@@ -65,7 +69,7 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	if err != nil {
 		return true, err
 	}
-	output.Code = statusCh
+	output.Code, _ = coerce.ToInt(statusCh)
 	out, err := cli.ContainerLogs(bctx, resp.ID, types.ContainerLogsOptions{ShowStdout: true, ShowStderr: true})
 
 	if err != nil {
@@ -77,6 +81,9 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	s := buf.String()
 	ctx.Logger().Debugf(s)
 	output.Logs = s
+
+	ctx.Logger().Info("Completed running the container with exit code ", statusCh)
+	ctx.Logger().Info("Check debug logs for more information...")
 
 	ctx.SetOutputObject(output)
 

@@ -11,8 +11,10 @@ require (
 	github.com/google/go-github v17.0.0+incompatible
 	github.com/google/go-querystring v1.0.0 // indirect
 	github.com/gorilla/schema v1.0.2 // indirect
+	github.com/jhoonb/archivex v0.0.0-20180718040744-0488e4ce1681
 	github.com/julienschmidt/httprouter v1.2.0
 	github.com/opencontainers/go-digest v1.0.0-rc1 // indirect
+	github.com/opencontainers/runc v0.1.1 // indirect
 	github.com/pkg/errors v0.8.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/project-flogo/core v0.9.0-alpha.4
