@@ -76,12 +76,20 @@ import (
 	"fmt"
 	"net/http"
 	"time"
+	"os"
 )
 
+func recoverFromUnexpectedServerError(){
+	if r := recover(); r!= nil {
+		fmt.Println("recovered from ", r)
+		os.Exit(1)
+    }
+}
 
 func main(){
 	
 	go func(){
+		defer recoverFromUnexpectedServerError()
 		resp, err := http.Get("http://localhost:{{.PORT}}/test")
 		defer resp.Body.Close()
 		if err != nil{
@@ -97,6 +105,7 @@ func main(){
 	}{
 		port,
 	}
+
 	f, err := os.Create("post-commit.go")
 	if err != nil {
 		return err
