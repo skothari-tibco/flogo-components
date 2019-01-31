@@ -22,4 +22,4 @@
 .idea/
 
 go.sum
-
+.vscode/

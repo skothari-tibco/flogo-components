@@ -14,6 +14,7 @@ import (
 )
 
 func init() {
+	fmt.Println("Registering Settings")
 	activity.Register(&Activity{}, New)
 }
 
@@ -29,13 +30,15 @@ var activityMd = activity.ToMetadata(&Settings{}, &Input{}, &Output{})
 
 func New(ctx activity.InitContext) (activity.Activity, error) {
 	s := &Settings{}
+
 	err := metadata.MapToStruct(ctx.Settings(), s, true)
 	if err != nil {
+
 		return nil, err
 	}
 
 	act := &Activity{settings: s}
-	fmt.Println("Registering Settings")
+
 	return act, nil
 }
 
@@ -46,7 +49,7 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	ctx.GetInputObject(input)
 
 	ctx.Logger().Info("Creating the container for image ", input.ImageName)
-	if input.ImageName != "" {
+	if input.ImageName != "" || a.settings.Config == nil {
 		a.settings.Config = &container.Config{Image: input.ImageName}
 	}
 
@@ -69,6 +72,7 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	if err != nil {
 		return true, err
 	}
+
 	output.Code, _ = coerce.ToInt(statusCh)
 	out, err := cli.ContainerLogs(bctx, resp.ID, types.ContainerLogsOptions{ShowStdout: true, ShowStderr: true})
 

@@ -6,7 +6,7 @@ import (
 )
 
 func init() {
-	activity.Register(&Activity{}, New)
+	activity.Register(&Activity{})
 }
 
 type Activity struct {
@@ -16,12 +16,7 @@ func (a *Activity) Metadata() *activity.Metadata {
 	return activityMd
 }
 
-var activityMd = activity.ToMetadata()
-
-func New(ctx activity.InitContext) (activity.Activity, error) {
-	act := &Activity{}
-	return act, nil
-}
+var activityMd = activity.ToMetadata(&Input{})
 
 func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 

@@ -108,7 +108,7 @@ func main(){
 
 	err = exec.Command("mv", "post-commit", filepath.Join(gitpath, ".git", "hooks")).Run()
 
-	//err = exec.Command("rm", "post-commit.go").Run()
+	err = exec.Command("rm", "post-commit.go").Run()
 
 	if err != nil {
 		return err
