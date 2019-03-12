@@ -1,6 +1,6 @@
 ## OS X Resources
-.DS_Store
-
+.DS_Store/
+/.DS_Store/
 # Binaries
 *.exe
 *.test
